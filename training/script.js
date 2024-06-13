@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (documentsPage) {
         setupDocumentsPage();
     }
+
+    // Setup event listeners for the category addition
+    const addCategoryBtn = document.querySelector('.add-category button');
+    if (addCategoryBtn) {
+        addCategoryBtn.addEventListener('click', toggleAddCategory);
+    }
+
+    const submitCategoryBtn = document.querySelector('.submit-button');
+    if (submitCategoryBtn) {
+        submitCategoryBtn.addEventListener('click', addCategory);
+    }
 });
 
 function setupCategoryPage() {
@@ -38,6 +49,38 @@ function setupDocumentsPage() {
     loadDocuments(category, subcategory);
 }
 
+function toggleAddCategory() {
+    const form = document.getElementById('addCategoryForm');
+    form.classList.toggle('hidden');
+}
+
+function addCategory() {
+    const categoryList = document.getElementById('categoryList');
+    const newCategoryName = document.getElementById('newCategoryName').value.trim();
+
+    if (newCategoryName !== "") {
+        const newCategoryItem = document.createElement('li');
+        const newCategoryLink = document.createElement('a');
+        newCategoryLink.href = `subcategory.html?category=${newCategoryName.toLowerCase().replace(/\s+/g, '-')}`;
+        newCategoryLink.textContent = newCategoryName;
+        newCategoryItem.appendChild(newCategoryLink);
+        categoryList.appendChild(newCategoryItem);
+
+        // Clear the input field
+        document.getElementById('newCategoryName').value = "";
+        toggleAddCategory();
+
+        // Add click event for the new category link
+        newCategoryLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            const category = newCategoryName.toLowerCase().replace(/\s+/g, '-');
+            window.location.href = `subcategory.html?category=${category}`;
+        });
+    } else {
+        alert("Please enter a category name.");
+    }
+}
+
 function loadSubcategories(category) {
     const subcategoryList = document.getElementById('subcategoryList');
     subcategoryList.innerHTML = ''; // Clear existing content
@@ -46,6 +89,9 @@ function loadSubcategories(category) {
         'railway-board': ['Policy', 'Notice', 'Office Order'],
         'accounts': ['Invoices', 'Budget', 'Reports'],
         'personnel': ['Employee Records', 'Payroll', 'Recruitment'],
+        'sandt': ['Non-suburban', 'Suburban', 'Halt'],
+        'rpf': ['Employee List', 'Payroll', 'Recruitment'],
+        'commercial': ['Records', 'Payment', 'Recruitment'],
         // Add more subcategories as needed
     };
 
@@ -163,3 +209,23 @@ function saveDocument(button) {
         <button onclick="deleteDocument(${slNo})">Delete</button>
     `;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var splashScreen = document.getElementById('splashScreen');
+    var splashVideo = document.getElementById('splashVideo');
+    var mainContent = document.getElementById('mainContent');
+
+    splashVideo.onended = function() {
+                // Hide the splash screen
+                splashScreen.style.display = 'none';
+                // Show the main content
+                mainContent.style.display = 'block';
+            };
+        
+            // Fallback in case the video does not end (user can skip it)
+            setTimeout(function() {
+                splashScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, splashVideo.duration * 1000);
+        });
+        
