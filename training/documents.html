@@ -3,36 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Management System - Documents</title>
+    <title>File Management System - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/3c2b98b98b.js" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="documents-page">
+<body>
+    <style>
+</style>
     <div class="dashboard-container">
         <header>
             <h1>FILE MANAGEMENT SYSTEM</h1>
-            <button class="login-button" onclick="location.href='index.html'">Login</button>
+            <button class="login-button" onclick="location.href='index.html'">Logout</button>
         </header>
         <div class="main-content">
             <aside class="sidebar">
                 <ul id="categoryList">
-                    <li><a href="dashboard.html">Railway Board</a></li>
-                    <li><a href="dashboard.html">Accounts</a></li>
-                    <li><a href="dashboard.html">Personnel</a></li>
-                    <li><a href="dashboard.html">S&T</a></li>
-                    <li><a href="dashboard.html">RPF</a></li>
-                    <li><a href="dashboard.html">Commercial</a></li>
-                    <li><a href="dashboard.html">Operating</a></li>
-                    <li><a href="dashboard.html">Mechanical</a></li>
+                    <li><a href="subcategory.html?category=railway-board">Railway Board</a></li>
+                    <li><a href="subcategory.html?category=accounts">Accounts</a></li>
+                    <li><a href="subcategory.html?category=personnel">Personnel</a></li>
+                    <li><a href="subcategory.html?category=sandt">S&T</a></li>
+                    <li><a href="subcategory.html?category=rpf">RPF</a></li>
+                    <li><a href="subcategory.html?category=commercial">Commercial</a></li>
+                    <li><a href="subcategory.html?category=operating">Operating</a></li>
+                    <li><a href="subcategory.html?category=mechanical">Mechanical</a></li>
                 </ul>
+                <div class="add-category">
+                    <button onclick="toggleAddCategory()">+</button>
+                    <span>Add Category/Department</span>
+                </div>
             </aside>
             <section class="content">
-                <h2 id="subcategoryTitle"></h2>
-                <table id="documentTable"></table>
-                <button onclick="addDocument()">ADD ROW</button>
-                <button onclick="saveDocuments()">SAVE</button>
+                <div id="addCategoryForm" class="hidden">
+                    <input type="text" id="newCategoryName" placeholder="Enter category/department name">
+                    <button class="submit-button" onclick="addCategory()">Submit</button>
+                </div>
+                <div id="dynamicContent">
+                    <h2>Welcome to the File Management System</h2>
+                    <p>Select a category from the left to manage files.</p>
+                </div>
+                <div class="main__img--container">
+                    <img src="pic1.svg" alt="pic" id="main__img"/>
+                </div>
             </section>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
+<footer class="footer">
+    <ul class="footer-nav">
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+</footer>
 </html>
